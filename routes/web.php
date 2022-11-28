@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfController;
+use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\TurmController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,46 +18,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*LOGIN*/
+/*Login - Homa*/
 Route::get('/', [LoginController::class, 'index'])->name('home.login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-/*HOME*/
+/*Admin*/
 Route::get('/list', [adminController::class, 'list'])->name('list');
 
 /*ESCOLA*/
-Route::get('/list/listSchool', [adminController::class, 'listSchool'])->name('list.school');
-Route::get('/list/addSchool', [adminController::class, 'addSchool'])->name('list.addSchool');
-Route::post('/list/addSchoolbank', [adminController::class, 'addSchoolbank'])->name('list.addSchoolbank');
-Route::get('/editSchool/{id}', [adminController::class, 'editSchool'])->name('list.editSchool');
-Route::post('/updateSchool/{id}', [adminController::class, 'updateSchool'])->name('list.updateSchool');
-Route::get('/deleteSchool/{id}', [adminController::class, 'deleteSchool'])->name('list.deleteSchool');
+Route::get('/list/listSchool', [SchoolController::class, 'listSchool'])->name('list.school');
+Route::get('/list/addSchool', [SchoolController::class, 'addSchool'])->name('list.addSchool');
+Route::post('/list/addSchoolbank', [SchoolController::class, 'addSchoolbank'])->name('list.addSchoolbank');
+Route::get('/editSchool/{id}', [SchoolController::class, 'editSchool'])->name('list.editSchool');
+Route::post('/updateSchool/{id}', [SchoolController::class, 'updateSchool'])->name('list.updateSchool');
+Route::get('/deleteSchool/{id}', [SchoolController::class, 'deleteSchool'])->name('list.deleteSchool');
 
 /*TURMA*/
-Route::get('/list/listturm', [adminController::class, 'listturm'])->name('list.turm');
-Route::get('/list/addTurm', [adminController::class, 'addTurm'])->name('list.addTurm');
-Route::post('/list/addTurmbank', [adminController::class, 'addTurmbank'])->name('list.addTurmbank');
-Route::get('/editTurm/{id}', [adminController::class, 'editTurm'])->name('list.editTurm');
-Route::post('/updateTurm/{id}', [adminController::class, 'updateTurm'])->name('list.updateTurm');
-Route::get('/deleteTurm/{id}', [adminController::class, 'deleteTurm'])->name('list.deleteTurm');
+Route::get('/list/listturm', [TurmController::class, 'listturm'])->name('list.turm');
+Route::get('/list/addTurm', [TurmController::class, 'addTurm'])->name('list.addTurm');
+Route::post('/list/addTurmbank', [TurmController::class, 'addTurmbank'])->name('list.addTurmbank');
+Route::get('/editTurm/{id}', [TurmController::class, 'editTurm'])->name('list.editTurm');
+Route::post('/updateTurm/{id}', [TurmController::class, 'updateTurm'])->name('list.updateTurm');
+Route::get('/deleteTurm/{id}', [TurmController::class, 'deleteTurm'])->name('list.deleteTurm');
 
 /*PROFESSOR*/
-Route::get('/list/listProf', [adminController::class, 'listProf'])->name('list.prof');
-Route::get('/list/addProf', [adminController::class, 'addProf'])->name('list.addProf');
-Route::post('/list/addProfbank', [adminController::class, 'addProfbank'])->name('list.addProfbank');
-Route::get('/editProf/{id}', [adminController::class, 'editProf'])->name('list.editProf');
-Route::post('/updateProf/{id}', [adminController::class, 'updateProf'])->name('list.updateProf');
-Route::get('/deleteProf/{id}', [adminController::class, 'deleteProf'])->name('list.deleteProf');
+Route::get('/list/listProf', [ProfController::class, 'listProf'])->name('list.prof');
+Route::get('/list/addProf', [ProfController::class, 'addProf'])->name('list.addProf');
+Route::post('/list/addProfbank', [ProfController::class, 'addProfbank'])->name('list.addProfbank');
+Route::get('/editProf/{id}', [ProfController::class, 'editProf'])->name('list.editProf');
+Route::post('/updateProf/{id}', [ProfController::class, 'updateProf'])->name('list.updateProf');
+Route::get('/deleteProf/{id}', [ProfController::class, 'deleteProf'])->name('list.deleteProf');
 
 
 
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
